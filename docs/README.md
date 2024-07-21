@@ -71,33 +71,38 @@ Retrieves a list of usernames of players currently in the game. Optionally inclu
   - `includeLocalPlayer`: Boolean indicating if the local player should be included in the results.
 - **Returns**: A table containing the usernames of players.
 
+### `httpRequest(url: string, method: string, data: table): {string}`
+Sends an HTTP request to the specified URL with the given method and optional data.
+- **Parameters**:
+  - `url`: The URL to which the request is sent.
+  - `method`: The HTTP method to use (e.g., "GET", "POST").
+  - `data`: An optional table containing data to send with the request, which will be JSON-encoded.
+- **Returns**: A decoded JSON response as a table if the request is successful; otherwise, `nil`.
+
+### `simulateKeyPress(key: string, repeatCount: number, delay: number): ()`
+Simulates rapid key presses of a specific key on the keyboard at a defined interval.
+- **Parameters**:
+  - `key`: The name of the key in `Enum.KeyCode` to simulate pressing.
+  - `repeatCount`: The number of times to simulate the key press.
+  - `delay`: The delay in seconds between key presses.
+- **Returns**: None
+- **Note**: This function might not have desired effects in all contexts, especially in games with custom control schemes.
+
+### `findAssetInWorkspace(assetName: string): Instance?`
+Searches recursively for an asset by name in the Roblox `workspace` and returns it if found.
+- **Parameters**:
+  - `assetName`: The name of the asset to search for.
+- **Returns**: The asset instance if found, otherwise `nil`.
+
+### `debugEnumerateThreads(): {thread}`
+Lists all the active threads in the current Lua environment.
+- **Returns**: A table containing references to all active threads.
+
 ## Installation
 To install the ExtendedUNC library, simply include the provided script in your Roblox project. Once included, the functions will be available as global functions due to the use of a metatable for `_G`.
 
-## Usage
-After including the ExtendedUNC script, you can call any of the functions directly. Here are a few examples:
+# Contributing
+Just open a pull request and I'll review it. 
 
-```lua
-local modifiedString = findAndReplace("old", "new", "This is the old string.")
-print(modifiedString)
-
-local originalTable = { a = 1, b = { c = 2 }}
-local clonedTable = tableClone(originalTable)
-
-local areEqual = deepEqual(originalTable, clonedTable)
-print(areEqual) -- true
-
-takeScreenshot()
-
-local merged = mergeTables({name = "John", age = 30}, {age = 31, country = "USA"})
-print(merged) -- {name = "John", age = 31, country = "USA"}
-
-local flattened = flattenTable({{1, 2}, 3, {4, 5}})
-print(table.concat(flattened, ", ")) -- 1, 2, 3, 4, 5
-
-local timestamp = timeToTimestamp(12, 34, 56)
-print(timestamp)
-
-local players = serverPlayers(true)
-print(table.concat(players, ", "))
-```
+# Bug Reporting
+Open a new Issue on repository
