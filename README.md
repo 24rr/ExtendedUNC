@@ -102,4 +102,7 @@ Lists all the active threads in the current Lua environment.
 To install the ExtendedUNC library, simply include the provided script in your Roblox project. Once included, the functions will be available as global functions due to the use of a metatable for `_G`.
 
 # Contributing
-Just open a pull request and I'll review it
+Just open a pull request and I'll review it. 
+
+# Bug Reporting
+Open a new Issue on repository
