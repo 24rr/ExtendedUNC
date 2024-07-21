@@ -83,6 +83,61 @@ function serverPlayers(includeLocalPlayer: boolean): {string}
     return usernames
 end
 
+<<<<<<< HEAD
+=======
+function httpRequest(url: string, method: string, data: table): {string}
+    local HttpService = game:GetService("HttpService")
+    local response = HttpService:RequestAsync({
+        Url = url,
+        Method = method,
+        Headers = {
+            ["Content-Type"] = "application/json"
+        },
+        Body = data and HttpService:JSONEncode(data) or nil
+    })
+    if response.Success then
+        return HttpService:JSONDecode(response.Body)
+    else
+        warn("HTTP request failed: " .. response.StatusCode .. " " .. response.StatusMessage)
+        return nil
+    end
+end
+
+function simulateKeyPress(key: string, repeatCount: number, delay: number)
+    for i = 1, repeatCount do
+        game:GetService("UserInputService"):SendKeyEvent(true, Enum.KeyCode[key], false, nil)
+        task.wait(delay)
+        game:GetService("UserInputService"):SendKeyEvent(false, Enum.KeyCode[key], false, nil)
+        task.wait(delay)
+    end
+end
+
+function findAssetInWorkspace(assetName: string): Instance?
+    local function search(instance)
+        for _, obj in ipairs(instance:GetDescendants()) do
+            if obj.Name == assetName then
+                return obj
+            end
+        end
+        return nil
+    end
+    return search(workspace)
+end
+
+function debugEnumerateThreads(): {thread}
+    local threads = {}
+    for index = 1, math.huge do
+        local status, thread = pcall(debug.getinfo, index, "f")
+        if status and thread.func then
+            table.insert(threads, coroutine.create(thread.func))
+        else
+            break
+        end
+    end
+    return threads
+end
+
+>>>>>>> 72a6134 (new functions)
 setmetatable(_G, {
     __index = function(_, key)
         local funcsArray = {
@@ -133,6 +188,33 @@ setmetatable(_G, {
                     return key == "serverPlayers"
                 end,
                 func = serverPlayers
+<<<<<<< HEAD
+=======
+            },
+            { -- httpRequest
+                check = function()
+                    return key == "httpRequest"
+                end,
+                func = httpRequest
+            },
+            { -- simulateKeyPress
+                check = function()
+                    return key == "simulateKeyPress"
+                end,
+                func = simulateKeyPress
+            },
+            { -- findAssetInWorkspace
+                check = function()
+                    return key == "findAssetInWorkspace"
+                end,
+                func = findAssetInWorkspace
+            },
+            { -- debugEnumerateThreads
+                check = function()
+                    return key == "debugEnumerateThreads"
+                end,
+                func = debugEnumerateThreads
+>>>>>>> 72a6134 (new functions)
             }
         }
         -- return the functions only
@@ -145,7 +227,11 @@ setmetatable(_G, {
 })
 
 print("ExtendedUNC loaded.")
+<<<<<<< HEAD
 print("New Functions:" .. table.concat({
+=======
+print("New Functions: " .. table.concat({
+>>>>>>> 72a6134 (new functions)
     "findAndReplace",
     "tableClone",
     "deepEqual",
@@ -153,5 +239,13 @@ print("New Functions:" .. table.concat({
     "mergeTables",
     "flattenTable",
     "timeToTimestamp",
+<<<<<<< HEAD
     "serverPlayers"
+=======
+    "serverPlayers",
+    "httpRequest",
+    "simulateKeyPress",
+    "findAssetInWorkspace",
+    "debugEnumerateThreads"
+>>>>>>> 72a6134 (new functions)
 }, ", "))
