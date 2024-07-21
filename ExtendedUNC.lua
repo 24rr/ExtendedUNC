@@ -83,8 +83,6 @@ function serverPlayers(includeLocalPlayer: boolean): {string}
     return usernames
 end
 
-<<<<<<< HEAD
-=======
 function httpRequest(url: string, method: string, data: table): {string}
     local HttpService = game:GetService("HttpService")
     local response = HttpService:RequestAsync({
@@ -137,7 +135,6 @@ function debugEnumerateThreads(): {thread}
     return threads
 end
 
->>>>>>> 72a6134 (new functions)
 setmetatable(_G, {
     __index = function(_, key)
         local funcsArray = {
@@ -188,8 +185,6 @@ setmetatable(_G, {
                     return key == "serverPlayers"
                 end,
                 func = serverPlayers
-<<<<<<< HEAD
-=======
             },
             { -- httpRequest
                 check = function()
@@ -214,7 +209,6 @@ setmetatable(_G, {
                     return key == "debugEnumerateThreads"
                 end,
                 func = debugEnumerateThreads
->>>>>>> 72a6134 (new functions)
             }
         }
         -- return the functions only
@@ -227,11 +221,7 @@ setmetatable(_G, {
 })
 
 print("ExtendedUNC loaded.")
-<<<<<<< HEAD
-print("New Functions:" .. table.concat({
-=======
 print("New Functions: " .. table.concat({
->>>>>>> 72a6134 (new functions)
     "findAndReplace",
     "tableClone",
     "deepEqual",
@@ -239,13 +229,9 @@ print("New Functions: " .. table.concat({
     "mergeTables",
     "flattenTable",
     "timeToTimestamp",
-<<<<<<< HEAD
-    "serverPlayers"
-=======
     "serverPlayers",
     "httpRequest",
     "simulateKeyPress",
     "findAssetInWorkspace",
     "debugEnumerateThreads"
->>>>>>> 72a6134 (new functions)
 }, ", "))
